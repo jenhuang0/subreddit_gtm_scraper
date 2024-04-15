@@ -15,13 +15,6 @@ with open("reddit_credential.json") as f:
         username=credentials["username"],
         password=credentials["password"],
     )
-# reddit = praw.Reddit(
-#     client_id="kCmpLPzl8985E-mA7gECpA",
-#     client_secret="jIsrDAo3d4YfpBFtQuk8SEB-hSwTWA",
-#     user_agent="WordCount",
-#     username="melmujer",
-#     password="JoelChang123!",
-# )
 
 # define the folder to save the images
 image_folder = "img"
