@@ -67,6 +67,7 @@ def process_subreddit(subreddit_name, limit=50):
     subreddit = reddit.subreddit(subreddit_name)
     image_folder = create_image_folder()
     unnamed_image_counter = 1
+    image_url_map = {}
 
     for submission in subreddit.hot(limit=limit):
         if submission.url.endswith((".jpg", ".png", ".jpeg")):
@@ -103,13 +104,18 @@ def process_subreddit(subreddit_name, limit=50):
                 with open(file_path, "wb") as f:
                     f.write(response.content)
                 print("Image saved at: ", file_path)
+                image_url_map[safe_filename] = submission.url
             else:
                 print("Failed to download image")
+
+    # After exiting the loop, save the URL map to a JSON file
+    with open("image_url_map.json", "w") as f:
+        json.dump(image_url_map, f)
 
 
 def main():
     subreddit_name = "GuessTheMovie"
-    limit = 50
+    limit = 1000
     process_subreddit(subreddit_name, limit)
 
 
